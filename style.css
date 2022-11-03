@@ -1,0 +1,181 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* First start by ensuring our body is full screen vertical & horizontal */
+body,
+main {
+  font-family: "Rubik", sans-serif;
+  height: 100vh;
+  width: 100vw;
+  background: black;
+  overflow: hidden;
+}
+
+main {
+  background-image: url("https://images.unsplash.com/photo-1595766147043-2fcc38822eb6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1935&q=80");
+  background-size: cover;
+  background-position: center 0%;
+  position: relative;
+  z-index: 2;
+  transition: transform 500ms cubic-bezier(0.13, 0.53, 0.38, 0.97);
+}
+
+/* NAVBAR SECTION
+Our wrapper controls the overall position of the flex container on page. And our
+inner we flex to help space each child item correctly. Ensure its behide curtin.
+When the curtin dataset is true/open you will notice this is brought forward. */
+.nav-wrapper {
+  position: absolute;
+  height: 50vh;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* FLEX CONTAINER */
+#nav-links {
+  display: flex;
+  /* Summary of the clamp function, it accepts three expressions as parameters.
+  Note, when using `clamp` we allowed to set a size for an element that can grow
+  with the size of size the viewport but it makes sure it doesn't go below `min`
+  or above a `max`. It has the same effect as code in Fluid Typography but in a
+  more of a one liner, and without the use of media queries.
+  
+  min - The minimum value is the smallest (most negative) value. This is the
+  lower bound in the range of allowed values. If the preferred value is less
+  than this value, the minimum value will be used.
+
+  val - The preferred value is the expression whose value is used as long as
+  the result is between the minimum and maximum values. 
+
+  max - The maximum value is the largest (most positive) expression value to
+  which the value of the property will be assigned if the preferred value is
+  greater than this upper bound. */
+  gap: clamp(1rem, 2vw, 2rem);
+  margin-top: clamp(2rem, 2vw, 3rem);
+  padding: clamp(1rem, 2vw, 2rem);
+  /* A start position our nav-links "curtain container" is y 70% out-of-flow. */
+  transform: translateY(70%) scale(0.9);
+  transition: transform 500ms cubic-bezier(0.13, 0.53, 0.38, 0.97);
+}
+#nav-links > .nav-link {
+  text-decoration: none;
+}
+#nav-links > .nav-link > .nav-link-label {
+  color: white;
+  font-size: 1.25rem;
+  margin: 0rem;
+}
+#nav-links > .nav-link > .nav-link-image {
+  /* Here our images in the curtin menu are 20 percentage of the viewport */
+  /* We ensure it does not get to low with a provided constrant of 300px */
+  width: max(20vw, 300px);
+  aspect-ratio: 1.8 / 1;
+  border-radius: 0.5rem;
+  margin-top: 0.75rem;
+  object-fit: cover;
+}
+
+/* BUTTON */
+#nav-toggle {
+  /* background: radial-gradient(
+        circle,
+        hsl(120, 57%, 74%) 22%,
+        hsl(0, 0%, 100%) 24%,
+        hsl(0, 0%, 100%) 42%,
+        hsl(0, 100%, 70%) 64%
+      ); */
+  height: 5rem;
+  width: 5rem;
+  position: fixed;
+  z-index: 3;
+  left: 50%;
+  bottom: 3rem;
+  transform: translateX(-50%);
+  border: none;
+  border-radius: 50%;
+  background-color: rgb(182, 142, 113);
+  outline: none;
+  box-shadow: 0rem 0rem 4rem rgba(0 0 0 / 60%);
+  cursor: pointer;
+  /* Here we ensure the following features are changed smoothly not instantly */
+  /* We you hover over the button its bigger and when active smaller */
+  /* To enable activity & pass instruction we use an `onclick` event handler */
+  transition: transform, background-color;
+  transition-timing-function: ease;
+  transition-duration: 300ms;
+}
+#nav-toggle:hover {
+  transform: translateX(-50%) scale(1.04);
+}
+#nav-toggle:active {
+  transform: translateX(-50%) scale(0.94);
+}
+
+#nav-toggle > i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  color: rgb(246, 231, 224);
+  /* color: black; */
+  font-size: 1.75rem;
+  font-weight: bolder;
+  opacity: 0;
+  transition: transform, opacity;
+  transition-timing-function: ease;
+  transition-duration: 350ms;
+}
+
+/* DATA ATTRIBUTES: 
+https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
+HTML is designed with extensibility in mind for data that should be associated
+with a particular element but not have any defined meaning. A `data` attributes
+allow us to store extra information on standard, semantic HTML elements without
+other hacks such as non-standard attributes, or extra properties on DOM.
+
+HTML syntax:
+The syntax is simple. Any attribute on any element whose attribute name starts
+with `data-` is a data attribute. Say you have an article and you want to store
+some extra information that doesn't have any visual representation
+
+JS access:
+Reading the values of these attributes out in JS is also very simple. You could
+use `getAttribute` with their full HTML name to read them, but a simpler way: a
+`DOMStringMap` you can read out via a dataset property. To get a data attribute
+through `dataset` object, get the property by the attribute name `data-here`.
+See script tag for more information.
+
+CSS access:
+As the `data` attribute is plain HTML attributes, you can access them from CSS. 
+Data attributes can also be stored to contain info that is constantly changing,
+like scores in a game or opening and closing of a <nav>. Using a CSS selectors
+and JS, you can access them. This allows you to build some cool effects without
+having to write your own display routines. You can use `attribute selectors` in
+CSS to change styles according the data. For additional info on selectors, see:
+https://www.w3schools.com/csSref/css_selectors.php
+
+Example our nav-toggle button `<i>` is opacity: 0. However, if the body `data`
+attribute is `not([data-nav="true"])` we apply open and the icon is visible. We
+have prefixed our whole body with the word `data-nav` and then marked it as no
+or closed, being the value of false as a configuraiton default. */
+body:not([data-nav="true"]) > #nav-toggle:hover > .open {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(0.9);
+}
+body[data-nav="true"] > #nav-toggle {
+  background: rgb(81, 164, 164);
+}
+body[data-nav="true"] > #nav-toggle > .close {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+body[data-nav="true"] > main {
+  transform: translateY(-50%);
+}
+body[data-nav="true"] > nav > #nav-links {
+  transform: translateY(0%) scale(1);
+}

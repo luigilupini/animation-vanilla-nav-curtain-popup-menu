@@ -10,149 +10,15 @@
       href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"
       rel="stylesheet"
     />
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>Curtain popup navbar menu for signor vespa 🛵</title>
   </head>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body,
-    main {
-      font-family: "Rubik", sans-serif;
-      height: 100vh;
-      width: 100vw;
-      background: black;
-    }
-
-    main {
-      background-image: url("https://images.unsplash.com/photo-1595766147043-2fcc38822eb6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1935&q=80");
-      background-size: cover;
-      position: relative;
-      z-index: 2;
-      transition: transform 500ms ease-in-out;
-    }
-
-    nav {
-      height: 50vh;
-      width: 100%;
-      position: absolute;
-      left: 0px;
-      bottom: 0px;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    #nav-links {
-      display: flex;
-      /* The clamp(min, val, max) accepts three comma expressions as parameters.
-      
-      Note that using clamp() for font sizes, allows you to set a font-size that
-      grows with the size of the viewport, but doesn't go below a min font-size,
-      or above a max. It has the same effect as code in Fluid Typography but in
-      one line, and without the use of media queries.
-
-      min - The minimum value is the smallest (most negative) value. This is the
-      lower bound in the range of allowed values. If the preferred value is less
-      than this value, the minimum value will be used.
-
-      val - The preferred value is the expression whose value is used as long as
-      the result is between the minimum and maximum values. 
-
-      max - The maximum value is the largest (most positive) expression value to
-      which the value of the property will be assigned if the preferred value is
-      greater than this upper bound. */
-
-      gap: clamp(1rem, 2vw, 2rem);
-      margin-top: clamp(2rem, 2vw, 3rem);
-      padding: clamp(1rem, 2vw, 2rem);
-      transform: translateY(70%) scale(0.9);
-      transition: transform 500ms ease-in-out;
-    }
-
-    #nav-links > .nav-link {
-      text-decoration: none;
-    }
-    #nav-links > .nav-link > .nav-link-label {
-      color: white;
-      font-size: 1.25rem;
-      margin: 0rem;
-    }
-    #nav-links > .nav-link > .nav-link-image {
-      width: max(20vw, 300px);
-      aspect-ratio: 1.8 / 1;
-      border-radius: 0.5rem;
-      margin-top: 0.75rem;
-      object-fit: cover;
-    }
-
-    #nav-toggle {
-      /* background: radial-gradient(
-        circle,
-        hsl(120, 57%, 74%) 22%,
-        hsl(0, 0%, 100%) 24%,
-        hsl(0, 0%, 100%) 42%,
-        hsl(0, 100%, 70%) 64%
-      ); */
-      height: 5rem;
-      width: 5rem;
-      position: fixed;
-      z-index: 3;
-      left: 50%;
-      bottom: 3rem;
-      transform: translateX(-50%);
-      border: none;
-      border-radius: 50%;
-      background-color: rgb(182, 142, 113);
-      outline: none;
-      box-shadow: 0rem 0rem 4rem rgba(0 0 0 / 60%);
-      cursor: pointer;
-      transition: transform, background-color;
-      transition-timing-function: ease;
-      transition-duration: 300ms;
-    }
-    #nav-toggle:hover {
-      transform: translateX(-50%) scale(1.04);
-    }
-    #nav-toggle:active {
-      transform: translateX(-50%) scale(0.94);
-    }
-
-    #nav-toggle > i {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) scale(0.9);
-      color: rgb(246, 231, 224);
-      /* color: black; */
-      font-size: 1.75rem;
-      font-weight: bolder;
-      opacity: 0;
-      transition: transform, opacity;
-      transition-timing-function: ease;
-      transition-duration: 350ms;
-    }
-
-    body:not([data-nav="true"]) > #nav-toggle:hover > .open {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(0.9);
-    }
-    body[data-nav="true"] > #nav-toggle > .close {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    body[data-nav="true"] > main {
-      transform: translateY(-50%);
-    }
-    body[data-nav="true"] > nav > #nav-links {
-      transform: translateY(0%) scale(1);
-    }
-  </style>
-  <body data-nav="false">
+  <!-- We keep track of opening & closing activity with the data attribute. -->
+  <!-- See data attribute section in the css file. -->
+  <body id="curtin" data-nav="false">
     <main></main>
-    <nav>
-      <!-- Our `flex` concealed menu that is y: 70% (ouf-of-flow) -->
+    <nav class="nav-wrapper">
+      <!-- `flex` concealed menu that is starting at y: 70% (ouf-of-flow) -->
       <div id="nav-links">
         <a class="nav-link" href="#">
           <h2 class="nav-link-label rubik-font">Home</h2>
@@ -176,29 +42,32 @@
           />
         </a>
         <a class="nav-link" href="#">
-          <h2 class="nav-link-label rubik-font">Contact</h2>
+          <h2 class="nav-link-label rubik-font">Contact Us</h2>
           <img
             class="nav-link-image"
             src="https://images.unsplash.com/photo-1622976743630-756142b1b242?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
           />
         </a>
-        <a class="nav-link" href="#">
+
+        <!-- <a class="nav-link" href="#">
           <h2 class="nav-link-label rubik-font">Join Us</h2>
           <img
             class="nav-link-image"
             src="https://images.unsplash.com/photo-1587478485321-9c75256440fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
           />
-        </a>
+        </a> -->
       </div>
     </nav>
     <button id="nav-toggle" type="button" onclick="toggleNav()">
-      <i class="open fa-light fa-bars-staggered"></i>
-      <i class="close fa-light fa-xmark-large"></i>
+      <i class="open fa-duotone fa-bars"></i>
+      <i class="close fa-light fa-xmark"></i>
     </button>
     <script>
+      const curtin = document.querySelector("#curtin");
       const toggleNav = () => {
-        document.body.dataset.nav =
-          document.body.dataset.nav === "true" ? "false" : "true";
+        curtin.dataset.nav === "true"
+          ? (curtin.dataset.nav = "false")
+          : (curtin.dataset.nav = "true");
       };
     </script>
     <script src="https://kit.fontawesome.com/944eb371a4.js"></script>
