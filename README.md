@@ -30,3 +30,8 @@ body[data-nav="true"] > nav > #nav-links {
   transform: translateY(0%) scale(1);
 }
 ```
+
+Regards, <br />
+Luigi Lupini <br />
+<br />
+I ❤️ all things (🇮🇹 / 🛵 / ☕️ / 👨‍👩‍👧)<br />
