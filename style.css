@@ -6,7 +6,7 @@
 /* First start by ensuring our body is full screen vertical & horizontal */
 body,
 main {
-  font-family: "Rubik", sans-serif;
+  font-family: 'Rubik', sans-serif;
   height: 100vh;
   width: 100vw;
   background: black;
@@ -14,7 +14,7 @@ main {
 }
 
 main {
-  background-image: url("https://images.unsplash.com/photo-1595766147043-2fcc38822eb6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1935&q=80");
+  background-image: url('https://images.unsplash.com/photo-1595766147043-2fcc38822eb6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1935&q=80');
   background-size: cover;
   background-position: center 0%;
   position: relative;
@@ -115,7 +115,7 @@ When the curtin dataset is true/open you will notice this is brought forward. */
   transform: translateX(-50%) scale(0.94);
 }
 
-#nav-toggle > i {
+#nav-toggle > svg {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -127,7 +127,13 @@ When the curtin dataset is true/open you will notice this is brought forward. */
   opacity: 0;
   transition: transform, opacity;
   transition-timing-function: ease;
-  transition-duration: 350ms;
+  transition-duration: 50ms;
+}
+
+svg {
+  width: 50px;
+  height: 50px;
+  fill: rgba(50, 50, 50, 0.701);
 }
 
 /* DATA ATTRIBUTES: 
@@ -162,20 +168,20 @@ Example our nav-toggle button `<i>` is opacity: 0. However, if the body `data`
 attribute is `not([data-nav="true"])` we apply open and the icon is visible. We
 have prefixed our whole body with the word `data-nav` and then marked it as no
 or closed, being the value of false as a configuraiton default. */
-body:not([data-nav="true"]) > #nav-toggle:hover > .open {
+body:not([data-nav='true']) > #nav-toggle:hover > .open {
   opacity: 1;
   transform: translate(-50%, -50%) scale(0.9);
 }
-body[data-nav="true"] > #nav-toggle {
+body[data-nav='true'] > #nav-toggle {
   background: rgb(81, 164, 164);
 }
-body[data-nav="true"] > #nav-toggle > .close {
+body[data-nav='true'] > #nav-toggle > .close {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
-body[data-nav="true"] > main {
+body[data-nav='true'] > main {
   transform: translateY(-50%);
 }
-body[data-nav="true"] > nav > #nav-links {
+body[data-nav='true'] > nav > #nav-links {
   transform: translateY(0%) scale(1);
 }
